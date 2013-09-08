@@ -1,0 +1,12 @@
+{
+  "server": "chat.freenode.net",
+  "port": 6667,
+  "nick": "atti",
+  "channels": [
+    "##your-channel"
+  ],
+  "trigger": "!",
+  "admins": {
+    "your-nickname": {"validated": false}
+  }
+}
