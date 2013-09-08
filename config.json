@@ -7,6 +7,12 @@
   ],
   "trigger": "!",
   "admins": {
-    "your-nickname": {"validated": false}
+    "eighty4": {"validated": false}
+  },
+  "db": {
+    "drivers": "rethinkdb",
+    "host": "localhost",
+    "port": 28015,
+    "db"  : "bot"
   }
 }
