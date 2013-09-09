@@ -1,7 +1,9 @@
 {
   "name": "bot.js",
   "version": "0.1.0",
-  "author": "Johan Stenehall",
+  "author": {
+    "name": "Johan Stenehall"
+  },
   "description": "IRC bot",
   "readme": "# bot.js - Write something here",
   "main": "bot",
@@ -16,9 +18,9 @@
   "engines": {
     "node": ">=0.10"
   },
-  "dependencies" : {
-    "colors"   :  "*",
-    "rethinkdb":  "*"
+  "dependencies": {
+    "colors": "*",
+    "rethinkdb": "*",
   },
   "devDependencies": {
     "chai": "~1.4.2",
@@ -26,5 +28,8 @@
   },
   "scripts": {
     "test": "find ./test -name '*_test.js' | xargs mocha -R spec"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/stenehall/bot.js/issues"
+  },
 }
