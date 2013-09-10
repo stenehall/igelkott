@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "colors": "*",
-    "rethinkdb": "*",
+    "rethinkdb": "*"
   },
   "devDependencies": {
     "chai": "~1.4.2",
@@ -31,5 +31,5 @@
   },
   "bugs": {
     "url": "https://github.com/stenehall/bot.js/issues"
-  },
+  }
 }
