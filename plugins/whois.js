@@ -6,7 +6,7 @@
  */
 var Plugin = exports.Plugin = function plugin (bot) {
 
-  this.listeners = {'330': '_330', '311': '_311'};
+  this.listeners = {'330': '_330'}; //, '311': '_311'};
   bot.pluginCore.apply(this, [bot]);
 
   /*

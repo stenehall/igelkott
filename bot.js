@@ -33,9 +33,9 @@ var Bot = module.exports = function Bot (config) {
   // Get db drivers and init it all.
   var DB = require('./lib/db/'+this.config.db.drivers+'.js').DB;
   this.db = new DB(this);
-  this.db.setup(function (that) {
-    that.pluginHandler = new PluginHandler(that);
-  }(this));
+  this.db.setup(function() {
+    this.pluginHandler = new PluginHandler(this);
+  }.bind(this));
 
 
   this.setUpServer(this.config.adapter || new Net.Socket);
@@ -47,7 +47,7 @@ Bot.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Bot
 Bot.prototype.setUpServer = function setUpServer(server) {
   this.server = server;
 
-  this.server.on('connect', function () { // connect isn't piped
+  this.server.on('connect', function () {
     this.pipe(this.composer).pipe(this.server).pipe(this.parser).pipe(this);
     this.emit('connect');
   }.bind(this));
@@ -74,7 +74,7 @@ Bot.prototype.loadConfig = function loadConfig(config) {
   }
   this.config = require(configFile);
 
-  // Lets get us some settins.
+  // Lets get us some settings.
   if (config !== undefined)
   {
     _.extend(this.config, config);
