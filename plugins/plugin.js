@@ -26,12 +26,12 @@ var Plugin = exports.Plugin = function plugin (bot) {
   }.bind(this);
 
   this.reload = function reload (message) {
-    if (this.bot.config.admins[message.origin.user.nick] === undefined || ! this.bot.config.admins[message.origin.user.nick]['validated'])
+    if (this.bot.config.admins[message.prefix.nick] === undefined || ! this.bot.config.admins[message.prefix.nick]['validated'])
     {
       console.log('User without admin rights can\'t reload' );
       return;
     }
-    this.bot.read('PRIVMSG', message.origin.channel, ':Reloading: '+message.message);
+    this.bot.read('PRIVMSG', message.parameters[0], ':Reloading: '+message.parameters[1].substr(''));
     this.bot.pluginHandler.pluginReload(message.message);
   }.bind(this);
 }

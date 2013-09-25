@@ -10,14 +10,18 @@
   bot.pluginCore.apply(this, [bot]);
 
   this._353 = function _353 (message) {
-    if ( ! this.bot.channels.getChannel(message.params[2]))
+
+    if ( ! this.bot.channels.getChannel(message.parameters[2]))
     {
-      this.bot.channels.addChannel(message.params[2]);
+      this.bot.channels.addChannel(message.parameters[2]);
     }
 
-    message.message.split(' ').forEach(function (user) {
-      this.bot.channels.getChannel(message.params[2]).users.addRawUser(user);
-      this.bot.read('WHOIS '+user);
+    var users = message.parameters[3].split(' ');
+    users.forEach(function (user) {
+      this.bot.channels.getChannel(message.parameters[2]).users.addRawUser(user);
+      var user = user.replace('+','').replace('@', '');
+      var obj = {'command': 'WHOIS', 'parameters': [ user ] };
+      this.bot.push(obj);
     }.bind(this));
   }.bind(this);
 }

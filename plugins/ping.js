@@ -10,6 +10,9 @@
   bot.pluginCore.apply(this, [bot]);
 
   this.pong = function pong (message) {
-    this.bot.read('PONG', message.origin.server);
+
+    var message = { 'command': 'PONG', 'parameters': [ message.parameters[0] ] };
+
+    this.bot.push(message);
   }.bind(this);
 }

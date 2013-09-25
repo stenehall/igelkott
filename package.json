@@ -20,13 +20,16 @@
   },
   "dependencies": {
     "colors": "*",
-    "rethinkdb": "*"
+    "rethinkdb": "*",
+    "underscore": "*",
+    "erk": "*"
   },
   "devDependencies": {
     "chai": "~1.4.2",
-    "mocha": "0.3.x"
+    "mocha": "1.3.x"
   },
   "scripts": {
+    "start": "node bot",
     "test": "find ./test -name '*_test.js' | xargs mocha -R spec"
   },
   "bugs": {

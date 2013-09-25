@@ -12,8 +12,13 @@ var Plugin = exports.Plugin = function plugin (bot) {
 
   this.connect = function connect ()
   {
-    // Time to join some channels so we can play!
-    this.bot.read('NICK', this.bot.config.nick);
-    this.bot.read('USER', this.bot.config.nick, '0', '*', ':' + this.bot.config.nick);
+    this.bot.push({command: "NICK", parameters: ["atti"]});
+
+    var message = {
+      'command': 'USER',
+      'parameters': [ 'atti', '0', '*', ':atti' ] // This is just stupid stupid stupid. Stupid, stupid stupid. Stupid...
+    };
+
+    this.bot.push(message);
   }.bind(this);
 }

@@ -10,7 +10,7 @@ var Fs = require('fs')
 
 var Plugin = exports.Plugin = function plugin (bot) {
 
-  this.listeners = {read: 'read', message: 'message'};
+  this.listeners = {sending: 'sending', receiving: 'receiving'};
   bot.pluginCore.apply(this, [bot]);
 
   // Lets create the db folder if it doesn't exist
@@ -21,16 +21,23 @@ var Plugin = exports.Plugin = function plugin (bot) {
     }
   });
 
-  this.read = function read (message) {
-    var log = "Sending   > " + message.replace("\r\n",'');
+  this.bot.composer.on('data', function(message) {
+    this.bot.emit('sending', message);
+  }.bind(this));
+
+  this.bot.parser.on('data', function(message) {
+    this.bot.emit('receiving', message);
+  }.bind(this));
+
+  this.sending = function sending (message) {
+    var log = "Sending   > " + message.toString().replace("\r\n",'');
     console.log(log.green);
-    Fs.appendFile("./db/log", message + "\n");
+    Fs.appendFile("./db/log", message.toString().replace("\r\n",'') + "\n");
   }.bind(this);
 
-
-  this.message = function message (message) {
-    var log = "Receiving < " + message.replace("\r\n",'');
+  this.receiving = function receiving (message) {
+    var log = "Receiving < " + message.toString().replace("\r\n",'');
     console.log(log.cyan);
-    Fs.appendFile("./db/log", message + "\n");
+    Fs.appendFile("./db/log", message.toString().replace("\r\n",'') + "\n");
   }.bind(this);
 }

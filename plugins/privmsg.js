@@ -1,4 +1,4 @@
-/*
+  /*
  * @CorePlugin
  * @Description: Handles PRIVMSG
  *
@@ -14,12 +14,10 @@ var Plugin = exports.Plugin = function plugin (bot) {
 
     var filter = new RegExp('^'+this.bot.config.trigger+'([^ ]*)');
 
-    parts = message.message.match(filter);
-    if (parts) // We have a server or a user
+    trigger = message.parameters[1].match(filter);
+    if (trigger) // We have a server or a user
     {
-      message.origin.channel = message.params[0];
-      message.message = message.message.slice(parts[0].length+1);
-      this.bot.emit(parts[1], message);
+      this.bot.emit(trigger[1], message);
     }
   }.bind(this);
 }

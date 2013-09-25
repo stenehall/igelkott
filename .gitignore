@@ -10,5 +10,9 @@ lib-cov
 pids
 logs
 results
+rethinkdb_data
+node_modules
+db
 
 npm-debug.log
+run_bot.js

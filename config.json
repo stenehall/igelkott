@@ -3,7 +3,7 @@
   "port": 6667,
   "nick": "atti",
   "channels": [
-    "##your-channel"
+    "#noweb"
   ],
   "trigger": "!",
   "admins": {
