@@ -5,6 +5,7 @@ var Stream = require('stream')
   , Net = require('net')
   , Path = require('path')
   , _ = require('underscore')
+  , Colors = require('colors')
   , Channel = require('./lib/channel.js').Channel
   , PluginHandler = require('./lib/pluginHandler.js').PluginHandler
   , PluginCore = require('./lib/pluginCore.js').pluginCore;
@@ -30,19 +31,32 @@ var Bot = module.exports = function Bot (config) {
 
   this.channels = new Channel;
 
-  // Get db drivers and init it all.
-  var DB = require('./lib/db/'+this.config.db.drivers+'.js').DB;
-  this.db = new DB(this);
-  this.db.setup(function() {
+  this.setUpDB(function() {
     this.pluginHandler = new PluginHandler(this);
   }.bind(this));
-
 
   this.setUpServer(this.config.adapter || new Net.Socket);
   this.doConnect(this.config.connect || function() {this.server.connect(this.config.port, this.config.server)});
 
 };
 Bot.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Bot}});
+
+Bot.prototype.setUpDB = function setUpDB(callback) {
+  var driver = this.config.db.drivers || 'rethinkdb';
+
+  var DB = require('./lib/db/'+driver+'.js').DB;
+  this.db = new DB(this);
+  this.db.setup(function(haveDBConnection) {
+    if ( ! haveDBConnection)
+    {
+      var log = 'Error     - No DB connection! Make sure you have the db server running';
+      console.log(log.red);
+      delete this.db;
+    }
+    callback();
+  });
+}
+
 
 Bot.prototype.setUpServer = function setUpServer(server) {
   this.server = server;

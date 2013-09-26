@@ -6,6 +6,12 @@
  */
 var Plugin = exports.Plugin = function plugin (bot) {
 
+  this.dbConfig = {
+    tables: {
+      'karma': 'id',
+    }
+  }
+
   this.listeners = {PRIVMSG: 'privmsg'};
   bot.pluginCore.apply(this, [bot]);
 

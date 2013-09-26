@@ -4,8 +4,8 @@
   "author": {
     "name": "Johan Stenehall"
   },
-  "description": "IRC bot",
-  "readme": "# bot.js - Write something here",
+  "description": "An IRC bot running on Erk",
+  "readme": "# bot.js #",
   "main": "bot",
   "repository": {
     "type": "git",
@@ -22,14 +22,15 @@
     "colors": "*",
     "rethinkdb": "*",
     "underscore": "*",
-    "erk": "*"
+    "erk": "*",
+    "colors": "*"
   },
   "devDependencies": {
     "chai": "~1.4.2",
     "mocha": "1.3.x"
   },
   "scripts": {
-    "start": "node bot",
+    "start": "node run_bot",
     "test": "find ./test -name '*_test.js' | xargs mocha -R spec"
   },
   "bugs": {

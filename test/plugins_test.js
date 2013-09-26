@@ -12,16 +12,6 @@ describe("Streams and Erk", function() {
     bot = new Bot({'adapter': s, 'connect': function() { this.server.emit('connect')}});
   });
 
-  describe("Connect", function() {
-    it("Should emit connected if successful", function(done) {
-      bot.on('connect', function() {
-        assert(true);
-        done();
-      });
-      bot.connect();
-    });
-  });
-
   describe("Ping pong", function() {
     it("Should get a PING event", function(done) {
       var command = 'PING';
