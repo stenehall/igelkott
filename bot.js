@@ -6,9 +6,10 @@ var Stream = require('stream')
   , Path = require('path')
   , _ = require('underscore')
   , Colors = require('colors')
-  , Channel = require('./lib/channel.js').Channel
+  //, Channel = require('./lib/channel.js').Channel
+  , Queue = require('./lib/queue').Queue
   , PluginHandler = require('./lib/pluginHandler.js').PluginHandler
-  , PluginCore = require('./lib/pluginCore.js').pluginCore;
+  , PluginCore = require('./lib/pluginCore.js').Plugin;
 
 var Bot = module.exports = function Bot (config) {
 
@@ -16,24 +17,29 @@ var Bot = module.exports = function Bot (config) {
 
   this.parser = new Erk.Parser();
   this.composer = new Erk.Composer();
+  this.queue = new Queue(this);
+
 
   this._read = function _read(size) {}
 
   this._write = function _write(message, enc, done) {
     this.emit(message.command, message);
+    this.queue.handleQueue(message);
     done();
   }
 
   this.loadConfig(config);
 
-  //Plugin helper function
-  this.pluginCore = PluginCore;
+  //this.channels = new Channel;
 
-  this.channels = new Channel;
-
-  this.setUpDB(function() {
+  if (this.config.loadPlugins)
+  {
     this.pluginHandler = new PluginHandler(this);
-  }.bind(this));
+  }
+
+  // this.setUpDB(function() {
+  //   this.pluginHandler = new PluginHandler(this);
+  // }.bind(this));
 
   this.setUpServer(this.config.adapter || new Net.Socket);
   this.doConnect(this.config.connect || function() {this.server.connect(this.config.port, this.config.server)});

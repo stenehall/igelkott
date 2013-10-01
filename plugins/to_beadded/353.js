@@ -11,14 +11,14 @@
 
   this._353 = function _353 (message) {
 
-    if ( ! this.bot.channels.getChannel(message.parameters[2]))
-    {
-      this.bot.channels.addChannel(message.parameters[2]);
-    }
+    // if ( ! this.bot.channels.getChannel(message.parameters[2]))
+    // {
+    //   this.bot.channels.addChannel(message.parameters[2]);
+    // }
 
     var users = message.parameters[3].split(' ');
     users.forEach(function (user) {
-      this.bot.channels.getChannel(message.parameters[2]).users.addRawUser(user);
+      //this.bot.channels.getChannel(message.parameters[2]).users.addRawUser(user);
       var user = user.replace('+','').replace('@', '');
       var obj = {'command': 'WHOIS', 'parameters': [ user ] };
       this.bot.push(obj);

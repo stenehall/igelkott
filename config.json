@@ -3,7 +3,7 @@
   "port": 6667,
   "nick": "atti",
   "channels": [
-    "#noweb"
+    "##botbotbot"
   ],
   "trigger": "!",
   "admins": {
@@ -14,5 +14,6 @@
     "host": "localhost",
     "port": 28015,
     "db"  : "bot"
-  }
+  },
+  "loadPlugins": true
 }

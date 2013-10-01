@@ -6,7 +6,7 @@
  */
 var Plugin = exports.Plugin = function plugin (bot) {
 
-  this.listeners = {JOIN: 'join', PART: 'part'};
+  this.listeners = {}; //{JOIN: 'join', PART: 'part'};
   bot.pluginCore.apply(this, [bot]);
 
   this.join = function join (message) {

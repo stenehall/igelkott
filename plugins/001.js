@@ -4,23 +4,23 @@
  *
  * @Status: Very unstable
  */
- var Plugin = exports.Plugin = function plugin (bot) {
 
-  this.listeners = {'001': '_001'};
-  bot.pluginCore.apply(this, [bot]);
+var Ping = function Ping(bot) {
+  this.pluginName = "ping";
 
-  this._001 = function _001 (message) {
-    this.bot.config.channels.forEach(function (channel) {
-      var message = {'command': 'JOIN', 'parameters': [ channel ]};
-      this.bot.push(message);
-    }, this);
+  this.listeners = {'001': this._001};
 
-    // Lets find out if we have identified users.
-    for (admin in this.bot.config.admins)
-    {
-      var message = {'command': 'WHOIS', 'parameters': [ admin ]};
-      this.bot.push(message);
-    }
-    this.bot.read('WHOIS', this.bot.config.nick);
-  }.bind(this);
 }
+
+Ping.prototype._001 = function _001(message) {
+
+  console.log(message);
+
+    this.config.channels.forEach(function (channel) {
+      var message = {'command': 'JOIN', 'parameters': [ channel ]};
+      console.log(message);
+      this.push(message);
+    }, this);
+}
+
+exports.Plugin = Ping;

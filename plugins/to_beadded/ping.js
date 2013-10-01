@@ -12,7 +12,6 @@
   this.pong = function pong (message) {
 
     var message = { 'command': 'PONG', 'parameters': [ message.parameters[0] ] };
-
     this.bot.push(message);
   }.bind(this);
 }

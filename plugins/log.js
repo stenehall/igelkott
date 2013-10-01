@@ -8,10 +8,9 @@ var Fs = require('fs')
   , Colors = require('colors');
 
 
-var Plugin = exports.Plugin = function plugin (bot) {
+var Log = function Log (bot) {
 
-  this.listeners = {sending: 'sending', receiving: 'receiving'};
-  bot.pluginCore.apply(this, [bot]);
+  this.listeners = {sending: this.sending, receiving: this.receiving};
 
   // Lets create the db folder if it doesn't exist
   Fs.stat('./db', function(err, stat) {
@@ -28,16 +27,19 @@ var Plugin = exports.Plugin = function plugin (bot) {
   this.bot.parser.on('data', function(message) {
     this.bot.emit('receiving', message);
   }.bind(this));
-
-  this.sending = function sending (message) {
-    var log = "Sending   > " + message.toString().replace("\r\n",'');
-    console.log(log.green);
-    Fs.appendFile("./db/log", message.toString().replace("\r\n",'') + "\n");
-  }.bind(this);
-
-  this.receiving = function receiving (message) {
-    var log = "Receiving < " + message.toString().replace("\r\n",'');
-    console.log(log.cyan);
-    Fs.appendFile("./db/log", message.toString().replace("\r\n",'') + "\n");
-  }.bind(this);
 }
+
+Log.prototype.sending = function sending (message) {
+  var log = "Sending   > " + message.toString().replace("\r\n",'');
+  console.log(log.green);
+  Fs.appendFile("./db/log", message.toString().replace("\r\n",'') + "\n");
+}.bind(this);
+
+Log.prototype.receiving = function receiving (message) {
+  var log = "Receiving < " + message.toString().replace("\r\n",'');
+  console.log(log.cyan);
+  Fs.appendFile("./db/log", message.toString().replace("\r\n",'') + "\n");
+}.bind(this);
+
+
+exports.Plugin = Log;
