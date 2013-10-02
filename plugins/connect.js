@@ -1,7 +1,6 @@
 /*
  * @CorePlugin
- * @Description: Joins channels and sets nick on connect, should probably be in
- * bot.js
+ * @Description: Sets nick on connect
  *
  * @Status: Very unstable
  */
@@ -11,11 +10,11 @@ var Connect = function Connect() {
 
 Connect.prototype.connect = function connect (message)
 {
-  this.push({command: "NICK", parameters: ["atti"]});
+  this.push({command: "NICK", parameters: [this.config.server.nick]});
 
   var message = {
     'command': 'USER',
-    'parameters': [ 'atti', '0', '*', ':atti' ] // This is just stupid stupid stupid. Stupid, stupid stupid. Stupid...
+    'parameters': [ this.config.server.nick, '0', '*', ':'+this.config.server.nick ] // This is just stupid stupid stupid. Stupid, stupid stupid. Stupid...
   };
 
   this.push(message);

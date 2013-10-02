@@ -13,14 +13,11 @@ var Ping = function Ping(bot) {
 }
 
 Ping.prototype._001 = function _001(message) {
-
-  console.log(message);
-
-    this.config.channels.forEach(function (channel) {
-      var message = {'command': 'JOIN', 'parameters': [ channel ]};
-      console.log(message);
-      this.push(message);
-    }, this);
+  this.config.server.channels.forEach(function (channel) {
+    var message = {'command': 'JOIN', 'parameters': [ channel ]};
+    console.log(message);
+    this.push(message);
+  }, this);
 }
 
 exports.Plugin = Ping;

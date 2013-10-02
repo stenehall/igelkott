@@ -11,7 +11,7 @@ describe("Plugin", function() {
 
   beforeEach(function() {
     s = new Stream.PassThrough({objectMode: true});
-    bot = new Bot({'loadPlugins': false, 'adapter': s, 'connect': function() { this.server.emit('connect')}});
+    bot = new Bot({'plugins': [], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
     plugin = new PluginCore(bot);
   });
 

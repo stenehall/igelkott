@@ -21,10 +21,10 @@ var Bot = module.exports = function Bot (config) {
 
   this._read = function _read(size) {}
 
-  this._write = function _write(message, enc, done) {
+  this._write = function _write(message, enc, callback) {
     this.emit(message.command, message);
     this.queue.handleQueue(message);
-    done();
+    callback();
   }
 
   this.loadConfig(config);
@@ -32,12 +32,12 @@ var Bot = module.exports = function Bot (config) {
   if (this.config.plugins !== undefined && this.config.plugins.length > 0)
   {
     this.config.plugins.forEach(function(plugin) {
-      console.log(plugin);
-    });
+      this.plugin.load(plugin);
+    }.bind(this));
   }
 
   this.setUpServer(this.config.adapter || new Net.Socket);
-  this.doConnect(this.config.connect || function() {this.server.connect(this.config.port, this.config.server)});
+  this.doConnect(this.config.connect || function() {this.server.connect(this.config.server.port, this.config.server.host)});
 
 };
 Bot.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Bot}});

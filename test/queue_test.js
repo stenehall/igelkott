@@ -11,7 +11,7 @@ describe("Queue", function() {
 
   beforeEach(function() {
     s = new Stream.PassThrough({objectMode: true});
-    bot = new Bot({'loadPlugins': true, 'adapter': s, 'connect': function() { this.server.emit('connect')}});
+    bot = new Bot({'plugins': [], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
   });
 
   describe("Add trigger, find trigger, kick user", function() {
