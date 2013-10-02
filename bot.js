@@ -1,15 +1,14 @@
-var Stream = require('stream')
-  , Util = require('util')
-  , Erk = require('erk')
-  , Fs = require('fs')
-  , Net = require('net')
-  , Path = require('path')
-  , _ = require('underscore')
-  , Colors = require('colors')
-  //, Channel = require('./lib/channel.js').Channel
-  , Queue = require('./lib/queue').Queue
-  , PluginHandler = require('./lib/pluginHandler.js').PluginHandler
-  , PluginCore = require('./lib/pluginCore.js').Plugin;
+var Stream = require('stream'),
+    Util = require('util'),
+    Erk = require('erk'),
+    Fs = require('fs'),
+    Net = require('net'),
+    Path = require('path'),
+    _ = require('underscore'),
+    Colors = require('colors'),
+
+    Queue = require('./lib/queue').Queue,
+    PluginHandler = require('./lib/pluginHandler.js').PluginHandler
 
 var Bot = module.exports = function Bot (config) {
 
@@ -18,7 +17,7 @@ var Bot = module.exports = function Bot (config) {
   this.parser = new Erk.Parser();
   this.composer = new Erk.Composer();
   this.queue = new Queue(this);
-
+  this.plugin = new PluginHandler(this);
 
   this._read = function _read(size) {}
 
@@ -30,39 +29,18 @@ var Bot = module.exports = function Bot (config) {
 
   this.loadConfig(config);
 
-  //this.channels = new Channel;
-
-  if (this.config.loadPlugins)
+  if (this.config.plugins !== undefined && this.config.plugins.length > 0)
   {
-    this.pluginHandler = new PluginHandler(this);
+    this.config.plugins.forEach(function(plugin) {
+      console.log(plugin);
+    });
   }
-
-  // this.setUpDB(function() {
-  //   this.pluginHandler = new PluginHandler(this);
-  // }.bind(this));
 
   this.setUpServer(this.config.adapter || new Net.Socket);
   this.doConnect(this.config.connect || function() {this.server.connect(this.config.port, this.config.server)});
 
 };
 Bot.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Bot}});
-
-Bot.prototype.setUpDB = function setUpDB(callback) {
-  var driver = this.config.db.drivers || 'rethinkdb';
-
-  var DB = require('./lib/db/'+driver+'.js').DB;
-  this.db = new DB(this);
-  this.db.setup(function(haveDBConnection) {
-    if ( ! haveDBConnection)
-    {
-      var log = 'Error     - No DB connection! Make sure you have the db server running';
-      console.log(log.red);
-      delete this.db;
-    }
-    callback();
-  });
-}
-
 
 Bot.prototype.setUpServer = function setUpServer(server) {
   this.server = server;

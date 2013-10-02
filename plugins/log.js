@@ -4,8 +4,8 @@
  *
  * @Status: Very unstable
  */
-var Fs = require('fs')
-  , Colors = require('colors');
+var Fs = require('fs'),
+    Colors = require('colors');
 
 
 var Log = function Log (bot) {

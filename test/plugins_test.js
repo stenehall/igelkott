@@ -1,18 +1,37 @@
 var assert = require('chai').assert
   , Stream = require('stream')
   , Bot    = require("../bot")
-  , PluginCore = require('../lib/pluginCore').Plugin;
+  , PluginCore = require('../lib/plugin').Plugin;
 
 describe("Plugin", function() {
 
-  var bot
-    , s
-    , plugin;
+  var bot,
+      s,
+      plugin;
 
   beforeEach(function() {
     s = new Stream.PassThrough({objectMode: true});
     bot = new Bot({'loadPlugins': false, 'adapter': s, 'connect': function() { this.server.emit('connect')}});
     plugin = new PluginCore(bot);
+  });
+
+  describe("PluginHandler", function() {
+    it("Should be able to load a plugin", function() {
+
+      bot.plugin.load('privmsg');
+
+      // Should also check require.cache
+      assert.strictEqual(typeof bot.plugin.plugins['privmsg.js'], 'object');
+    });
+
+    it("Should be able to unload a plugin", function() {
+
+      bot.plugin.load('privmsg');
+      bot.plugin.unload('privmsg');
+
+
+      assert.strictEqual(typeof bot.plugin.plugins['privmsg.js'], 'undefined');
+    });
   });
 
   describe("TestPlugin", function() {

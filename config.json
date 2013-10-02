@@ -1,19 +1,15 @@
 {
-  "server": "chat.freenode.net",
-  "port": 6667,
-  "nick": "atti",
-  "channels": [
-    "##botbotbot"
-  ],
+  "server": {
+    "host": "chat.freenode.net",
+    "port": 6667,
+    "nick": "atti",
+    "channels": [
+      "##botbotbot"
+    ]
+  },
   "trigger": "!",
   "admins": {
     "eighty4": {"validated": false}
   },
-  "db": {
-    "drivers": "rethinkdb",
-    "host": "localhost",
-    "port": 28015,
-    "db"  : "bot"
-  },
-  "loadPlugins": true
+  "plugins": ["privmsg", "log", "001", "connect"]
 }
