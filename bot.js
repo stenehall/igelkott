@@ -70,6 +70,9 @@ Bot.prototype.loadConfig = function loadConfig(config) {
     console.error('Please copy the config.json file from the npm package to this directory and edit it as you like.');
     return false;
   }
+
+  // Make sure we actually load the config from file and not from cache.
+  delete require.cache[require.resolve(configFile)];
   this.config = require(configFile);
 
   // Lets get us some settings.

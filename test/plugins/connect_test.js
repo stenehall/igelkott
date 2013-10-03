@@ -4,16 +4,11 @@ var assert = require('chai').assert
 
 describe("Plugin - connect", function() {
 
-  var bot,
-      s,
-      plugin;
-
-  beforeEach(function() {
-    s = new Stream.PassThrough({objectMode: true});
-    bot = new Bot({'plugins': ['connect'], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
-  });
-
   it("Should emit NICK on connect", function(done) {
+
+    var s = new Stream.PassThrough({objectMode: true});
+    var bot = new Bot({'plugins': ['connect'], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
+
     bot.on('NICK', function(message) {
       assert.equal(message.parameters[0], this.config.server.nick);
       done();
