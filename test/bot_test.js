@@ -6,12 +6,9 @@ describe("Bot", function() {
 
   var bot;
 
-  beforeEach(function() {
-    bot = new Bot({'plugins': []});
-  });
-
   describe("New bot", function() {
     it("Should load config from directory", function() {
+      bot = new Bot({'plugins': []});
       assert.strictEqual(bot.config.server.host, "chat.freenode.net");
       assert.strictEqual(bot.config.server.port, 6667);
     });
@@ -25,7 +22,7 @@ describe("Bot", function() {
 
   describe("Connect", function() {
     it("Should emit connected if successful", function(done) {
-      var bot = new Bot({'plugins': [], 'adapter': new Stream.PassThrough, 'connect': function() { this.server.emit('connect')}})
+      bot = new Bot({'plugins': [], 'adapter': new Stream.PassThrough, 'connect': function() { this.server.emit('connect')}})
       bot.on('connect', function() {
         assert(true);
         done();

@@ -9,21 +9,18 @@ describe("Plugin - 001", function() {
       plugin,
       host = 'brooks.freenode.net';
 
-  beforeEach(function() {
+  it("Should JOIN all channels in config", function(done) {
+
     s = new Stream.PassThrough({objectMode: true});
     bot = new Bot({server: {channels: ['#one', '#two']}, plugins: ['001'], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
-  });
-
-  it("Should JOIN all channels in config", function(done) {
 
     var channels = [];
 
     bot.on('JOIN', function(message) {
       channels.push(message.parameters[0]);
-
-      if (channels.length == bot.config.server.channels.length)
+      if (channels.length == 2)
       {
-        assert.equal(channels.toString(), bot.config.server.channels.toString());
+        assert.deepEqual(channels, ['#one', '#two']);
         done();
       }
     });

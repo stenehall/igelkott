@@ -6,11 +6,8 @@
  */
 
 var Ping = function Ping() {
-
   this.listeners = {PING: this.pong};
-
 }
-
 
 Ping.prototype.pong = function pong(message) {
   var message = { 'command': 'PONG', 'parameters': [ message.parameters[0] ] };

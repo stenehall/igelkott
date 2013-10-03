@@ -17,7 +17,6 @@ describe("Plugin", function() {
 
   describe("PluginHandler", function() {
     it("Should be able to load a plugin", function() {
-
       bot.plugin.load('privmsg');
 
       // Should also check require.cache
@@ -25,10 +24,8 @@ describe("Plugin", function() {
     });
 
     it("Should be able to unload a plugin", function() {
-
       bot.plugin.load('privmsg');
       bot.plugin.unload('privmsg');
-
 
       assert.strictEqual(typeof bot.plugin.plugins['privmsg.js'], 'undefined');
     });

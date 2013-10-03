@@ -6,10 +6,7 @@
  */
 
 var Ping = function Ping(bot) {
-  this.pluginName = "ping";
-
   this.listeners = {'001': this._001};
-
 }
 
 Ping.prototype._001 = function _001(message) {

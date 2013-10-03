@@ -5,24 +5,20 @@ var assert = require('chai').assert
 describe("Plugin - PING", function() {
 
   var bot,
-      s,
-      plugin,
-      host = 'brooks.freenode.net';
-
-  beforeEach(function() {
-    s = new Stream.PassThrough({objectMode: true});
-    bot = new Bot({'plugins': ['ping'], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
-  });
+      s;
 
   it("Should correctly respond to PING", function(done) {
 
+    s = new Stream.PassThrough({objectMode: true});
+    bot = new Bot({'plugins': ['ping'], 'adapter': s, 'connect': function() { this.server.emit('connect')}});
+
     bot.on('PONG', function(message) {
-      assert.equal(message.parameters[0], host);
+      assert.equal(message.parameters[0], "brooks.freenode.net");
       done();
     });
 
     bot.connect();
-    s.push("PING "+host+"\r\n");
+    s.push("PING brooks.freenode.net\r\n");
   });
 
 
