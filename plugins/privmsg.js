@@ -6,7 +6,7 @@
  */
 var PRIVMSG = function PRIVMSG() {
   this.listeners = {PRIVMSG: this.msg};
-}
+};
 
 PRIVMSG.prototype.msg = function msg(message) {
     var filter = new RegExp('^'+this.config.trigger+'([^ ]*)');

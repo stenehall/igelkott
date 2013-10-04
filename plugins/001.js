@@ -5,15 +5,15 @@
  * @Status: Very unstable
  */
 
-var Ping = function Ping(bot) {
+var Ping = function Ping() {
   this.listeners = {'001': this._001};
-}
+};
 
-Ping.prototype._001 = function _001(message) {
+Ping.prototype._001 = function _001() {
   this.config.server.channels.forEach(function (channel) {
-    var message = {'command': 'JOIN', 'parameters': [ channel ]};
-    this.push(message);
+    var obj = {'command': 'JOIN', 'parameters': [ channel ]};
+    this.push(obj);
   }, this);
-}
+};
 
 exports.Plugin = Ping;

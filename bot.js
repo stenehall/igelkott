@@ -1,14 +1,12 @@
 var Stream = require('stream'),
-    Util = require('util'),
     Erk = require('erk'),
     Fs = require('fs'),
     Net = require('net'),
     Path = require('path'),
     _ = require('underscore'),
-    Colors = require('colors'),
 
     Queue = require('./lib/queue').Queue,
-    PluginHandler = require('./lib/pluginHandler.js').PluginHandler
+    PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
 
 var Bot = module.exports = function Bot (config) {
 
@@ -19,13 +17,13 @@ var Bot = module.exports = function Bot (config) {
   this.queue = new Queue(this);
   this.plugin = new PluginHandler(this);
 
-  this._read = function _read(size) {}
+  this._read = function _read(size) {};
 
   this._write = function _write(message, enc, callback) {
     this.emit(message.command, message);
     this.queue.handleQueue(message);
     callback();
-  }
+  };
 
   this.loadConfig(config);
 
@@ -36,8 +34,8 @@ var Bot = module.exports = function Bot (config) {
     }.bind(this));
   }
 
-  this.setUpServer(this.config.adapter || new Net.Socket);
-  this.doConnect(this.config.connect || function() {this.server.connect(this.config.server.port, this.config.server.host)});
+  this.setUpServer(this.config.adapter || new Net.Socket());
+  this.doConnect(this.config.connect || function() {this.server.connect(this.config.server.port, this.config.server.host); });
 
 };
 Bot.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Bot}});
@@ -49,19 +47,19 @@ Bot.prototype.setUpServer = function setUpServer(server) {
     this.pipe(this.composer).pipe(this.server).pipe(this.parser).pipe(this);
     this.emit('connect');
   }.bind(this));
-}
+};
 
 Bot.prototype.doConnect = function doConnect(doConnect) {
   this.connection = doConnect;
-}
+};
 
 Bot.prototype.connect = function connect() {
   this.connection();
-}
+};
 
 Bot.prototype.end = function connect () {
   console.log('Time to sleep...');
-}
+};
 
 Bot.prototype.loadConfig = function loadConfig(config) {
 
@@ -80,4 +78,4 @@ Bot.prototype.loadConfig = function loadConfig(config) {
   {
     _.extend(this.config, config);
   }
-}
+};
