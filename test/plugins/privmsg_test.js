@@ -23,7 +23,7 @@ describe('Plugin - PRIVMSG', function() {
     });
 
     bot.connect();
-    s.push(':jsmith!~jsmith@unaffiliated/jsmith PRIVMSG #channel :hello!\r\n');
+    s.write(':jsmith!~jsmith@unaffiliated/jsmith PRIVMSG #channel :hello!\r\n');
   });
 
   it('Should emit trigger:command', function(done) {
@@ -37,7 +37,7 @@ describe('Plugin - PRIVMSG', function() {
     });
 
     bot.connect();
-    s.push(':jsmith!~jsmith@unaffiliated/jsmith PRIVMSG #channel :!kick fsmith\r\n');
+    s.write(':jsmith!~jsmith@unaffiliated/jsmith PRIVMSG #channel :!kick fsmith\r\n');
   });
 
 

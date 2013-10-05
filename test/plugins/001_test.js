@@ -24,7 +24,7 @@ describe('Plugin - 001', function() {
     });
 
     bot.connect();
-    s.push(':cameron.freenode.net 001 jsmith :Welcome to the freenode Internet Relay Chat Network jsmith\r\n');
+    s.write(':cameron.freenode.net 001 jsmith :Welcome to the freenode Internet Relay Chat Network jsmith\r\n');
 
   });
 

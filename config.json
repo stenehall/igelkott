@@ -11,5 +11,5 @@
   "admins": {
     "eighty4": {"validated": false}
   },
-  "plugins": ["privmsg", "log", "001", "connect", "ping"]
+  "plugins": ["privmsg", "log", "001", "connect", "ping", "help", "plugin"]
 }

@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "node run_bot",
-    "test": "find ./test -name '*_test.js' | xargs mocha -R spec"
+    "test": "mocha -R spec --recursive"
   },
   "bugs": {
     "url": "https://github.com/stenehall/bot.js/issues"

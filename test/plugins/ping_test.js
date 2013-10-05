@@ -18,7 +18,7 @@ describe('Plugin - PING', function() {
     });
 
     bot.connect();
-    s.push('PING brooks.freenode.net\r\n');
+    s.write('PING brooks.freenode.net\r\n');
   });
 
 

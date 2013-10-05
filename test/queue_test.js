@@ -1,7 +1,8 @@
 var assert = require('chai').assert,
     Stream = require('stream'),
     Bot    = require('../bot'),
-    PluginCore = require('../lib/plugin').Plugin;
+    PluginCore = require('../lib/plugin').Plugin,
+    queue = require('../lib/queue.js');
 
 describe('Queue', function() {
 
@@ -15,9 +16,22 @@ describe('Queue', function() {
 
   describe('Add trigger, find trigger, kick user', function() {
 
+    it('Should be able to add to add to the queue', function() {
+      var q = new queue.Queue();
+
+      assert.ok(q.add({foo: 'bar'}));
+    });
+
+    it('Should be able to remove an added object to the queue', function() {
+      var q = new queue.Queue();
+
+      assert.ok(q.add({foo: 'bar'}));
+    });
+
+
     it('Should kick jsmith', function(done) {
 
-      bot.plugin.load('privmsg.js', '../plugins', 'core');
+      bot.plugin.load('privmsg.js');
 
       var TestPluginContructor = function TestPlugin() {
         this.pluginName = 'ping';
@@ -48,11 +62,11 @@ describe('Queue', function() {
       });
       bot.connect();
 
-      s.push(':fsmith!~fsmith@unaffiliated/fsmith PRIVMSG #noweb :!kick jsmith\r\n');
+      s.write(':fsmith!~fsmith@unaffiliated/fsmith PRIVMSG #noweb :!kick jsmith\r\n');
       setTimeout(function() {
         // Start of by sanding the wrong data
-        s.push(':hobana.freenode.net 330 atti asmith asmith :is logged in as\r\n');
-        s.push(':hobana.freenode.net 330 atti fsmith fsmith :is logged in as\r\n');
+        s.write(':hobana.freenode.net 330 atti asmith asmith :is logged in as\r\n');
+        s.write(':hobana.freenode.net 330 atti fsmith fsmith :is logged in as\r\n');
       }, 100);
     });
 
