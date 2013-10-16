@@ -12,7 +12,7 @@ describe('Plugin - help', function() {
     s = new Stream.PassThrough({objectMode: true});
     bot = new Bot({'plugins': ['privmsg', 'help'], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
 
-    this.PluginCore = new PluginCore();
+    this.PluginCore = new PluginCore(bot);
     var TestPluginContructor = function TestPlugin() {
       this.pluginName = 'testplugin';
       this.help = {

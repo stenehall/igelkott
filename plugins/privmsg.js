@@ -10,12 +10,12 @@ var PRIVMSG = function PRIVMSG() {
 };
 
 PRIVMSG.prototype.msg = function msg(message) {
-    var filter = new RegExp('^'+this.config.trigger+'([^ ]*)');
+    var filter = new RegExp('^'+this.bot.config.trigger+'([^ ]*)');
     var trigger = message.parameters[1].match(filter);
 
     if (trigger)
     {
-      this.emit('trigger:'+trigger[1], message);
+      this.bot.emit('trigger:'+trigger[1], message);
     }
 };
 

@@ -7,12 +7,13 @@
 
 var Ping = function Ping() {
   this.listeners = {'001': this._001};
+  this.requireDB = true;
 };
 
 Ping.prototype._001 = function _001() {
-  this.config.server.channels.forEach(function (channel) {
+  this.bot.config.server.channels.forEach(function (channel) {
     var obj = {'command': 'JOIN', 'parameters': [ channel ]};
-    this.push(obj);
+    this.bot.push(obj);
   }, this);
 };
 

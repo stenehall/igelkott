@@ -4,12 +4,9 @@
     "port": 6667,
     "nick": "itta",
     "channels": [
-      "##botbotbot"
+      "#noweb"
     ]
   },
   "trigger": "!",
-  "admins": {
-    "eighty4": {"validated": false}
-  },
   "plugins": ["privmsg", "log", "001", "connect", "ping", "help", "plugin"]
 }

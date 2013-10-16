@@ -1,7 +1,7 @@
 var assert = require('chai').assert,
     Stream = require('stream'),
-    Bot    = require('../bot'),
-    PluginCore = require('../lib/plugin').Plugin;
+    Bot    = require('../../bot'),
+    PluginCore = require('../../lib/plugin').Plugin;
 
 describe('Plugin', function() {
 
@@ -48,7 +48,6 @@ describe('Plugin', function() {
     });
 
     it('Should listen to added events', function(done) {
-      this.PluginCore = new PluginCore();
 
       var TestPluginContructor = function TestPlugin() {
         this.pluginName = 'ping';
@@ -65,7 +64,7 @@ describe('Plugin', function() {
     });
 
     it('Should be able to add and remove event listeners', function() {
-      this.PluginCore = new PluginCore();
+      this.PluginCore = new PluginCore(bot);
 
       var TestPluginContructor = function TestPlugin() {
         this.pluginName = 'ping';
@@ -76,9 +75,9 @@ describe('Plugin', function() {
       var testPluginInstance = new TestPlugin(bot);
 
       testPluginInstance.On(function() {
-        assert.strictEqual(bot.listeners('PING').indexOf(PING), 0);
+        assert.strictEqual(typeof bot.listeners('PING')[0], 'function');
         testPluginInstance.Off(function() {
-          assert.strictEqual(bot.listeners('PING').indexOf(PING), -1);
+          assert.strictEqual(bot.listeners('PING').length, 0);
         });
       });
     });

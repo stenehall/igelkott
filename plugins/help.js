@@ -11,10 +11,10 @@ var Help = function Help() {
     "default": "This is the help plugin, you just called it so you already know how it works"
   };
 
-  this.listeners = {'trigger:help': this.help};
+  this.listeners = {'trigger:help': this.trigger};
 };
 
-Help.prototype.help = function help(message) {
+Help.prototype.trigger = function trigger(message) {
 
   var args = message.parameters[1].split(' ');
 
@@ -25,11 +25,11 @@ Help.prototype.help = function help(message) {
   if (args.length === 0) {
 
     var names = [];
-    for (var key in this.plugin.plugins)
+    for (var key in this.bot.plugin.plugins)
     {
-      if (this.plugin.plugins[key].name !== undefined)
+      if (this.bot.plugin.plugins[key].name !== undefined)
       {
-        names.push(this.plugin.plugins[key].name);
+        names.push(this.bot.plugin.plugins[key].name);
       }
     }
 
@@ -42,8 +42,8 @@ Help.prototype.help = function help(message) {
       name += '.js';
     }
 
-    if (this.plugin.plugins[name] !== undefined) {
-      var helpText = this.plugin.plugins[name].help;
+    if (this.bot.plugin.plugins[name] !== undefined) {
+      var helpText = this.bot.plugin.plugins[name].help;
 
       if (args.length > 0) {
         // Iterate over help to find the correct help based on args
@@ -66,7 +66,7 @@ Help.prototype.help = function help(message) {
     }
   }
 
-  this.push(message);
+  this.bot.push(message);
 };
 
 exports.Plugin = Help;

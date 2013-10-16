@@ -3,12 +3,10 @@ var assert = require('chai').assert,
     Bot    = require(process.cwd()+'/bot');
 
 describe('Plugin - PING', function() {
-
   var bot,
       s;
 
   it('Should correctly respond to PING', function(done) {
-
     s = new Stream.PassThrough({objectMode: true});
     bot = new Bot({'plugins': ['ping'], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
 
@@ -20,6 +18,4 @@ describe('Plugin - PING', function() {
     bot.connect();
     s.write('PING brooks.freenode.net\r\n');
   });
-
-
 });

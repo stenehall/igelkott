@@ -11,7 +11,7 @@ var Ping = function Ping() {
 
 Ping.prototype.pong = function pong(message) {
   var obj = { 'command': 'PONG', 'parameters': [ message.parameters[0] ] };
-  this.push(obj);
+  this.bot.push(obj);
 };
 
 exports.Plugin = Ping;

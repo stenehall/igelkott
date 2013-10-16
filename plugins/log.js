@@ -8,7 +8,7 @@ var Fs = require('fs'),
     Colors = require('colors');
 
 
-var Log = function Log (bot) {
+var Log = function Log () {
 
   this.listeners = {sending: this.sending, receiving: this.receiving};
 

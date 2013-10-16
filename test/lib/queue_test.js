@@ -1,8 +1,8 @@
 var assert = require('chai').assert,
     Stream = require('stream'),
-    Bot    = require('../bot'),
-    PluginCore = require('../lib/plugin').Plugin,
-    queue = require('../lib/queue.js');
+    Bot    = require('../../bot'),
+    PluginCore = require('../../lib/plugin').Plugin,
+    queue = require('../../lib/queue.js');
 
 describe('Queue', function() {
 
@@ -45,7 +45,7 @@ describe('Queue', function() {
             parameters : [message.parameters[0], 'kick', message.parameters[1].split(' ')[1]]
         };
 
-        this.queue.add({trigger: function(command, message) {
+        this.bot.queue.add({trigger: function(command, message) {
           return (command.message.prefix.nick === message.parameters[2]);
         } , 'message': obj});
       };

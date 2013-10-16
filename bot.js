@@ -27,6 +27,7 @@ var Bot = module.exports = function Bot (config) {
 
   this.loadConfig(config);
 
+  // Time to load some plugins.
   if (this.config.plugins !== undefined && this.config.plugins.length > 0)
   {
     this.config.plugins.forEach(function(plugin) {
@@ -63,8 +64,12 @@ Bot.prototype.end = function connect () {
 
 Bot.prototype.loadConfig = function loadConfig(config) {
 
-  var configFile = Path.resolve(__dirname, 'config.json');
-  if ( ! Fs.existsSync(configFile)) {
+  var configFile = Path.resolve(process.cwd(), 'config.json');
+
+  console.log(configFile);
+
+  if ( ! Fs.existsSync(configFile))
+  {
     console.error('Please copy the config.json file from the npm package to this directory and edit it as you like.');
     return false;
   }
@@ -73,7 +78,7 @@ Bot.prototype.loadConfig = function loadConfig(config) {
   delete require.cache[require.resolve(configFile)];
   this.config = require(configFile);
 
-  // Lets get us some settings.
+  // @TODO: Rewrite this into using ENV instead. This really isn't useful.
   if (config !== undefined)
   {
     _.extend(this.config, config);

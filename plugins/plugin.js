@@ -18,7 +18,7 @@ var Plugin = function Plugin() {
 };
 
 Plugin.prototype.reload = function reload(message) {
-  this.plugin.reload(message.parameters[1].split(' ')[1]);
+  this.bot.plugin.reload(message.parameters[1].split(' ')[1]);
 };
 
 exports.Plugin = Plugin;
