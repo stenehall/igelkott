@@ -1,33 +1,33 @@
 var assert = require('chai').assert,
     Stream = require('stream'),
-    Bot    = require('../../bot'),
+    Igelkott    = require('../../igelkott'),
     PluginCore = require('../../lib/plugin').Plugin;
 
 describe('Plugin', function() {
 
-  var bot,
+  var igelkott,
       s,
       plugin;
 
   beforeEach(function() {
     s = new Stream.PassThrough({objectMode: true});
-    bot = new Bot({'plugins': [], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
-    plugin = new PluginCore(bot);
+    igelkott = new Igelkott({'plugins': [], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
+    plugin = new PluginCore(igelkott);
   });
 
   describe('PluginHandler', function() {
     it('Should be able to load a plugin', function() {
-      bot.plugin.load('privmsg');
+      igelkott.plugin.load('privmsg');
 
       // Should also check require.cache
-      assert.strictEqual(typeof bot.plugin.plugins['privmsg.js'], 'object');
+      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg.js'], 'object');
     });
 
     it('Should be able to unload a plugin', function() {
-      bot.plugin.load('privmsg');
-      bot.plugin.unload('privmsg');
+      igelkott.plugin.load('privmsg');
+      igelkott.plugin.unload('privmsg');
 
-      assert.strictEqual(typeof bot.plugin.plugins['privmsg.js'], 'undefined');
+      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg.js'], 'undefined');
     });
   });
 
@@ -38,7 +38,7 @@ describe('Plugin', function() {
         this.pluginName = 'ping';
         this.listeners = {'001': this.hello};
       });
-      var testPluginInstance = new TestPlugin(bot);
+      var testPluginInstance = new TestPlugin(igelkott);
 
       assert.strictEqual(testPluginInstance.pluginName, 'ping');
       assert.strictEqual(testPluginInstance.constructor, 'TestPlugin');
@@ -57,14 +57,14 @@ describe('Plugin', function() {
       };
 
       var TestPlugin = PluginCore.create(TestPluginContructor);
-      var testPluginInstance = new TestPlugin(bot);
+      var testPluginInstance = new TestPlugin(igelkott);
 
       testPluginInstance.On();
-      bot.emit('PING');
+      igelkott.emit('PING');
     });
 
     it('Should be able to add and remove event listeners', function() {
-      this.PluginCore = new PluginCore(bot);
+      this.PluginCore = new PluginCore(igelkott);
 
       var TestPluginContructor = function TestPlugin() {
         this.pluginName = 'ping';
@@ -72,12 +72,12 @@ describe('Plugin', function() {
       };
       var PING = TestPluginContructor.prototype.PING = function PING() {};
       var TestPlugin = PluginCore.create(TestPluginContructor);
-      var testPluginInstance = new TestPlugin(bot);
+      var testPluginInstance = new TestPlugin(igelkott);
 
       testPluginInstance.On(function() {
-        assert.strictEqual(typeof bot.listeners('PING')[0], 'function');
+        assert.strictEqual(typeof igelkott.listeners('PING')[0], 'function');
         testPluginInstance.Off(function() {
-          assert.strictEqual(bot.listeners('PING').length, 0);
+          assert.strictEqual(igelkott.listeners('PING').length, 0);
         });
       });
     });

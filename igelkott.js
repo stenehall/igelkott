@@ -8,7 +8,7 @@ var Stream = require('stream'),
     Queue = require('./lib/queue').Queue,
     PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
 
-var Bot = module.exports = function Bot (config) {
+var Igelkott = module.exports = function Igelkott (config) {
 
   Stream.Duplex.call(this, {objectMode: true});
 
@@ -39,9 +39,9 @@ var Bot = module.exports = function Bot (config) {
   this.doConnect(this.config.connect || function() {this.server.connect(this.config.server.port, this.config.server.host); });
 
 };
-Bot.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Bot}});
+Igelkott.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Igelkott}});
 
-Bot.prototype.setUpServer = function setUpServer(server) {
+Igelkott.prototype.setUpServer = function setUpServer(server) {
   this.server = server;
 
   this.server.on('connect', function () {
@@ -50,23 +50,21 @@ Bot.prototype.setUpServer = function setUpServer(server) {
   }.bind(this));
 };
 
-Bot.prototype.doConnect = function doConnect(doConnect) {
+Igelkott.prototype.doConnect = function doConnect(doConnect) {
   this.connection = doConnect;
 };
 
-Bot.prototype.connect = function connect() {
+Igelkott.prototype.connect = function connect() {
   this.connection();
 };
 
-Bot.prototype.end = function connect () {
+Igelkott.prototype.end = function connect () {
   console.log('Time to sleep...');
 };
 
-Bot.prototype.loadConfig = function loadConfig(config) {
+Igelkott.prototype.loadConfig = function loadConfig(config) {
 
   var configFile = Path.resolve(process.cwd(), 'config.json');
-
-  console.log(configFile);
 
   if ( ! Fs.existsSync(configFile))
   {

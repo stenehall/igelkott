@@ -10,12 +10,12 @@ var PRIVMSG = function PRIVMSG() {
 };
 
 PRIVMSG.prototype.msg = function msg(message) {
-    var filter = new RegExp('^'+this.bot.config.trigger+'([^ ]*)');
+    var filter = new RegExp('^'+this.igelkott.config.trigger+'([^ ]*)');
     var trigger = message.parameters[1].match(filter);
 
     if (trigger)
     {
-      this.bot.emit('trigger:'+trigger[1], message);
+      this.igelkott.emit('trigger:'+trigger[1], message);
     }
 };
 

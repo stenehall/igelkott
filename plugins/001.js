@@ -5,16 +5,16 @@
  * @Status: Very unstable
  */
 
-var Ping = function Ping() {
+var _001 = function _001() {
   this.listeners = {'001': this._001};
   this.requireDB = true;
 };
 
-Ping.prototype._001 = function _001() {
-  this.bot.config.server.channels.forEach(function (channel) {
+_001.prototype._001 = function _001() {
+  this.igelkott.config.server.channels.forEach(function (channel) {
     var obj = {'command': 'JOIN', 'parameters': [ channel ]};
-    this.bot.push(obj);
+    this.igelkott.push(obj);
   }, this);
 };
 
-exports.Plugin = Ping;
+exports.Plugin = _001;

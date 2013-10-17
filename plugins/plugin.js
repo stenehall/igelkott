@@ -1,6 +1,6 @@
 /*
  * @CorePlugin
- * @Description: Makes sure the bot isn't disconnected by sending PONG
+ * @Description: Makes sure the igelkott isn't disconnected by sending PONG
  *
  * @Status: Very unstable
  */
@@ -14,11 +14,15 @@ var Plugin = function Plugin() {
     }
   };
 
-  this.listeners = {'trigger:reload': this.reload};
+  this.listeners = {'trigger:reload': this.reload, 'trigger:load': this.load};
 };
 
 Plugin.prototype.reload = function reload(message) {
-  this.bot.plugin.reload(message.parameters[1].split(' ')[1]);
+  this.igelkott.plugin.reload(message.parameters[1].split(' ')[1]);
+};
+
+Plugin.prototype.load = function load(message) {
+  this.igelkott.plugin.load(message.parameters[1].split(' ')[1]);
 };
 
 exports.Plugin = Plugin;

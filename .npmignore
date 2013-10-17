@@ -8,6 +8,5 @@
 .wafpickle-*
 CVS
 npm-debug.log
-rethinkdb_data
 db
 node_modules

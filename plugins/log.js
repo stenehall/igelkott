@@ -20,12 +20,12 @@ var Log = function Log () {
     }
   });
 
-  this.bot.composer.on('data', function(message) {
-    this.bot.emit('sending', message);
+  this.igelkott.composer.on('data', function(message) {
+    this.igelkott.emit('sending', message);
   }.bind(this));
 
-  this.bot.parser.on('data', function(message) {
-    this.bot.emit('receiving', message);
+  this.igelkott.parser.on('data', function(message) {
+    this.igelkott.emit('receiving', message);
   }.bind(this));
 }
 

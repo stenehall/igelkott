@@ -10,14 +10,15 @@ var Connect = function Connect() {
 
 Connect.prototype.connect = function connect ()
 {
-  this.bot.push({command: 'NICK', parameters: [this.bot.config.server.nick]});
+  console.log('connect');
+  this.igelkott.push({command: 'NICK', parameters: [this.igelkott.config.server.nick]});
 
   var obj = {
     'command': 'USER',
-    'parameters': [ this.bot.config.server.nick, '0', '*', ':'+this.bot.config.server.nick ] // This is just stupid stupid stupid. Stupid, stupid stupid. Stupid...
+    'parameters': [ this.igelkott.config.server.nick, '0', '*', ':'+this.igelkott.config.server.nick ] // This is just stupid stupid stupid. Stupid, stupid stupid. Stupid...
   };
 
-  this.bot.push(obj);
+  this.igelkott.push(obj);
 };
 
 exports.Plugin = Connect;

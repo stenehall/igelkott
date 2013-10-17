@@ -1,6 +1,6 @@
 /*
  * @CorePlugin
- * @Description: Makes sure the bot isn't disconnected by sending PONG
+ * @Description: Makes sure the igelkott isn't disconnected by sending PONG
  *
  * @Status: Very unstable
  */
@@ -25,11 +25,12 @@ Help.prototype.trigger = function trigger(message) {
   if (args.length === 0) {
 
     var names = [];
-    for (var key in this.bot.plugin.plugins)
+
+    for (var key in this.igelkott.plugin.plugins)
     {
-      if (this.bot.plugin.plugins[key].name !== undefined)
+      if (this.igelkott.plugin.plugins[key].name !== undefined)
       {
-        names.push(this.bot.plugin.plugins[key].name);
+        names.push(this.igelkott.plugin.plugins[key].name);
       }
     }
 
@@ -42,8 +43,8 @@ Help.prototype.trigger = function trigger(message) {
       name += '.js';
     }
 
-    if (this.bot.plugin.plugins[name] !== undefined) {
-      var helpText = this.bot.plugin.plugins[name].help;
+    if (this.igelkott.plugin.plugins[name] !== undefined) {
+      var helpText = this.igelkott.plugin.plugins[name].help;
 
       if (args.length > 0) {
         // Iterate over help to find the correct help based on args
@@ -66,7 +67,7 @@ Help.prototype.trigger = function trigger(message) {
     }
   }
 
-  this.bot.push(message);
+  this.igelkott.push(message);
 };
 
 exports.Plugin = Help;

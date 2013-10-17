@@ -1,15 +1,15 @@
 {
-  "name": "bot.js",
-  "version": "0.1.1",
+  "name": "igelkott",
+  "version": "0.2.0",
   "author": {
     "name": "Johan Stenehall"
   },
   "description": "An IRC bot running on Erk",
-  "readme": "# bot.js #",
-  "main": "bot",
+  "readme": "# Igelkott #",
+  "main": "igelkott.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stenehall/bot.js"
+    "url": "https://github.com/stenehall/igelkott.js"
   },
   "keywords": [
     "bot"
@@ -29,10 +29,10 @@
     "mocha": "1.3.x"
   },
   "scripts": {
-    "start": "node run_bot",
+    "start": "node run_igelkott",
     "test": "mocha -R spec --recursive"
   },
   "bugs": {
-    "url": "https://github.com/stenehall/bot.js/issues"
+    "url": "https://github.com/stenehall/igelkott/issues"
   }
 }
