@@ -2,8 +2,8 @@
  * @CorePlugin
  * @Description: Handles PRIVMSG
  *
- * @Status: Very unstable
  */
+
 var PRIVMSG = function PRIVMSG() {
   this.name = 'privmsg';
   this.listeners = {PRIVMSG: this.msg};

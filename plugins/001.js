@@ -2,7 +2,6 @@
  * @CorePlugin
  * @Description: Listens on 001 after that it should be safe to join
  *
- * @Status: Very unstable
  */
 
 var _001 = function _001() {

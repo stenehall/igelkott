@@ -2,8 +2,8 @@
  * @CorePlugin
  * @Description: Logs everythings that's happening
  *
- * @Status: Very unstable
  */
+
 var Fs = require('fs'),
     Colors = require('colors');
 

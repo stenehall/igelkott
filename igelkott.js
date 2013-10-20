@@ -4,6 +4,7 @@ var Stream = require('stream'),
     Net = require('net'),
     Path = require('path'),
     _ = require('underscore'),
+    Colors = require('colors'),
 
     Queue = require('./lib/queue').Queue,
     PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
@@ -31,7 +32,7 @@ var Igelkott = module.exports = function Igelkott (config) {
   if (this.config.plugins !== undefined && this.config.plugins.length > 0)
   {
     this.config.plugins.forEach(function(plugin) {
-      this.plugin.load(plugin);
+      this.load(plugin);
     }.bind(this));
   }
 
@@ -40,6 +41,10 @@ var Igelkott = module.exports = function Igelkott (config) {
 
 };
 Igelkott.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Igelkott}});
+
+Igelkott.prototype.load = function load(plugin, pluginPath) {
+  this.plugin.tryToLoad(plugin, pluginPath);
+}
 
 Igelkott.prototype.setUpServer = function setUpServer(server) {
   this.server = server;
@@ -53,6 +58,11 @@ Igelkott.prototype.setUpServer = function setUpServer(server) {
 Igelkott.prototype.doConnect = function doConnect(doConnect) {
   this.connection = doConnect;
 };
+
+Igelkott.prototype.log = function log(text) {
+  text = "Message   | "+text;
+  console.log(text.yellow);
+}
 
 Igelkott.prototype.connect = function connect() {
   this.connection();

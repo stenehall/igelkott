@@ -2,7 +2,8 @@ var assert = require('chai').assert,
     Stream = require('stream'),
     Igelkott    = require(process.cwd()+'/igelkott');
 
-describe('Plugin - PING', function() {
+describe('Plugin - ping', function() {
+
   var igelkott,
       s;
 

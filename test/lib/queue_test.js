@@ -31,7 +31,7 @@ describe('Queue', function() {
 
     it('Should kick jsmith', function(done) {
 
-      igelkott.plugin.load('privmsg.js');
+      igelkott.plugin.tryToLoad('privmsg');
 
       var TestPluginContructor = function TestPlugin() {
         this.pluginName = 'ping';

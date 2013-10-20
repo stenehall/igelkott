@@ -3,7 +3,7 @@ var assert = require('chai').assert,
     Igelkott    = require(process.cwd()+'/igelkott'),
     PluginCore = require('../../lib/plugin').Plugin;
 
-describe('Plugin - Plugin', function() {
+describe('Plugin - plugin', function() {
 
   var igelkott,
       s;

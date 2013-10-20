@@ -2,7 +2,6 @@
  * @CorePlugin
  * @Description: Makes sure the igelkott isn't disconnected by sending PONG
  *
- * @Status: Very unstable
  */
 
 var Plugin = function Plugin() {
@@ -22,7 +21,7 @@ Plugin.prototype.reload = function reload(message) {
 };
 
 Plugin.prototype.load = function load(message) {
-  this.igelkott.plugin.load(message.parameters[1].split(' ')[1]);
+  this.igelkott.load(message.parameters[1].split(' ')[1]);
 };
 
 exports.Plugin = Plugin;

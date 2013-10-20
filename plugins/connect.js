@@ -2,15 +2,14 @@
  * @CorePlugin
  * @Description: Sets nick on connect
  *
- * @Status: Very unstable
  */
+
 var Connect = function Connect() {
   this.listeners = {connect: this.connect};
 };
 
 Connect.prototype.connect = function connect ()
 {
-  console.log('connect');
   this.igelkott.push({command: 'NICK', parameters: [this.igelkott.config.server.nick]});
 
   var obj = {

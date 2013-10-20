@@ -2,7 +2,7 @@ var assert = require('chai').assert,
     Stream = require('stream'),
     Igelkott    = require(process.cwd()+'/igelkott');
 
-describe('Plugin - PRIVMSG', function() {
+describe('Plugin - privmsg', function() {
 
   var igelkott,
       s;
@@ -39,6 +39,5 @@ describe('Plugin - PRIVMSG', function() {
     igelkott.connect();
     s.write(':jsmith!~jsmith@unaffiliated/jsmith PRIVMSG #channel :!kick fsmith\r\n');
   });
-
 
 });

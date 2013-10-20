@@ -2,7 +2,6 @@
  * @CorePlugin
  * @Description: Makes sure the igelkott isn't disconnected by sending PONG
  *
- * @Status: Very unstable
  */
 
 var Help = function Help() {

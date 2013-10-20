@@ -17,14 +17,14 @@ describe('Plugin', function() {
 
   describe('PluginHandler', function() {
     it('Should be able to load a plugin', function() {
-      igelkott.plugin.load('privmsg');
+      igelkott.plugin.tryToLoad('privmsg');
 
       // Should also check require.cache
       assert.strictEqual(typeof igelkott.plugin.plugins['privmsg.js'], 'object');
     });
 
     it('Should be able to unload a plugin', function() {
-      igelkott.plugin.load('privmsg');
+      igelkott.plugin.tryToLoad('privmsg');
       igelkott.plugin.unload('privmsg');
 
       assert.strictEqual(typeof igelkott.plugin.plugins['privmsg.js'], 'undefined');
