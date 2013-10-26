@@ -45,6 +45,7 @@ Igelkott.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value
 
 Object.defineProperty(Igelkott.prototype, "db", {
 get: function() {
+
   if (!this._db) {
     Parse.initialize(this.config.database.app_id, this.config.database.js_key);
     this._db = Parse;
