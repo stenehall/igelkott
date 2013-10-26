@@ -8,5 +8,9 @@
     ]
   },
   "trigger": "!",
-  "plugins": ["001", "433", "privmsg", "log", "connect", "ping", "help", "plugin"]
+  "plugins": ["001", "433", "privmsg", "log", "connect", "ping", "help", "plugin"],
+  "database": {
+    "app_id":"",
+    "js_key": ""
+  }
 }

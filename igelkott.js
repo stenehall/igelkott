@@ -5,6 +5,7 @@ var Stream = require('stream'),
     Path = require('path'),
     _ = require('underscore'),
     Colors = require('colors'),
+    Parse = require('parse').Parse,
 
     Queue = require('./lib/queue').Queue,
     PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
@@ -42,9 +43,18 @@ var Igelkott = module.exports = function Igelkott (config) {
 };
 Igelkott.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Igelkott}});
 
+Object.defineProperty(Igelkott.prototype, "db", {
+get: function() {
+  if (!this._db) {
+    Parse.initialize(this.config.database.app_id, this.config.database.js_key);
+    this._db = Parse;
+  }
+  return this._db;
+}});
+
 Igelkott.prototype.load = function load(plugin, pluginPath) {
   this.plugin.tryToLoad(plugin, pluginPath);
-}
+};
 
 Igelkott.prototype.setUpServer = function setUpServer(server) {
   this.server = server;
@@ -59,10 +69,7 @@ Igelkott.prototype.doConnect = function doConnect(doConnect) {
   this.connection = doConnect;
 };
 
-Igelkott.prototype.log = function log(text) {
-  text = "Message   | "+text;
-  console.log(text.yellow);
-}
+Igelkott.prototype.log = function log() {};
 
 Igelkott.prototype.connect = function connect() {
   this.connection();
@@ -74,19 +81,16 @@ Igelkott.prototype.end = function connect () {
 
 Igelkott.prototype.loadConfig = function loadConfig(config) {
 
-  var configFile = Path.resolve(process.cwd(), 'config.json');
+  var configFile = Path.resolve(__dirname, 'config.json');
 
-  if ( ! Fs.existsSync(configFile))
+  this.config = {};
+  if (Fs.existsSync(configFile))
   {
-    console.error('Please copy the config.json file from the npm package to this directory and edit it as you like.');
-    return false;
+    // Make sure we actually load the config from file and not from cache.
+    delete require.cache[require.resolve(configFile)];
+    this.config = require(configFile);
   }
 
-  // Make sure we actually load the config from file and not from cache.
-  delete require.cache[require.resolve(configFile)];
-  this.config = require(configFile);
-
-  // @TODO: Rewrite this into using ENV instead. This really isn't useful.
   if (config !== undefined)
   {
     _.extend(this.config, config);

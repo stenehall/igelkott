@@ -20,14 +20,14 @@ describe('Plugin', function() {
       igelkott.plugin.tryToLoad('privmsg');
 
       // Should also check require.cache
-      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg.js'], 'object');
+      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'object');
     });
 
     it('Should be able to unload a plugin', function() {
       igelkott.plugin.tryToLoad('privmsg');
       igelkott.plugin.unload('privmsg');
 
-      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg.js'], 'undefined');
+      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'undefined');
     });
   });
 

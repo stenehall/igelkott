@@ -14,7 +14,7 @@ var Log = function Log () {
 
   // Lets create the db folder if it doesn't exist
   Fs.stat('./db', function(err, stat) {
-    if(err != undefined && err.code === 'ENOENT')
+    if(err !== null && err.code === 'ENOENT')
     {
         Fs.mkdir('db');
     }
@@ -27,7 +27,12 @@ var Log = function Log () {
   this.igelkott.parser.on('data', function(message) {
     this.igelkott.emit('receiving', message);
   }.bind(this));
-}
+
+  this.igelkott.log = function log(text) {
+    text = "Message   | "+text;
+    console.log(text.yellow);
+  };
+};
 
 Log.prototype.sending = function sending (message) {
   var log = "Sending   > " + message.toString().replace("\r\n",'');
