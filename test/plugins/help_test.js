@@ -25,7 +25,7 @@ describe('Plugin - help', function() {
 
     var TestPlugin = PluginCore.create(TestPluginContructor);
     var testPluginInstance = new TestPlugin(igelkott);
-    igelkott.plugin.plugins['testplugin.js'] = testPluginInstance;
+    igelkott.plugin.plugins['testplugin'] = testPluginInstance;
     testPluginInstance.On();
     igelkott.connect();
   });

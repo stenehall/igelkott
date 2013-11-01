@@ -37,11 +37,6 @@ Help.prototype.trigger = function trigger(message) {
   } else {
     var name = args.shift();
 
-  // Make sure we always have .js
-    if (name.indexOf('.js') === -1) {
-      name += '.js';
-    }
-
     if (this.igelkott.plugin.plugins[name] !== undefined) {
       var helpText = this.igelkott.plugin.plugins[name].help;
 
