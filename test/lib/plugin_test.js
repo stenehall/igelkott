@@ -29,6 +29,13 @@ describe('Plugin', function() {
 
       assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'undefined');
     });
+
+    it('Should be able to reload a plugin', function() {
+      igelkott.plugin.tryToLoad('privmsg');
+      igelkott.plugin.reload('privmsg');
+
+      assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'object');
+    });
   });
 
   describe('TestPlugin', function() {

@@ -59,7 +59,7 @@ describe('Plugin - help', function() {
 
   it('Should return error message on missing plugin', function(done) {
     igelkott.once('PRIVMSG', function(message) {
-      assert.equal(message.parameters[1], 'No plugin named noplugin.js');
+      assert.equal(message.parameters[1], 'No plugin named noplugin');
       done();
     });
 

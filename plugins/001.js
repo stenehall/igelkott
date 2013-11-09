@@ -6,7 +6,6 @@
 
 var _001 = function _001() {
   this.listeners = {'001': this._001};
-  this.requireDB = true;
 };
 
 _001.prototype._001 = function _001() {
