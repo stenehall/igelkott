@@ -1,15 +1,26 @@
 var assert = require('chai').assert,
-    Stream = require('stream'),
-    Igelkott    = require(process.cwd()+'/igelkott');
+Stream = require('stream'),
+Igelkott    = require(process.cwd()+'/igelkott'),
+Privmsg = require('../../plugins/privmsg.js').Plugin;
 
 describe('Plugin - privmsg', function() {
 
   var igelkott,
-      s;
+  config,
+  s,
+  server;
 
-  beforeEach(function() {
+  beforeEach(function () {
     s = new Stream.PassThrough({objectMode: true});
-    igelkott = new Igelkott({'plugins': ['privmsg'], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
+
+    config = {
+      core: [],
+      plugins: {},
+      'adapter': s, 'connect': function() { this.server.emit('connect'); }
+    };
+
+    igelkott = new Igelkott(config);
+    igelkott.plugin.load('privmsg', {}, Privmsg);
   });
 
   it('Should trigger on PRIVMSG', function(done) {
@@ -39,5 +50,4 @@ describe('Plugin - privmsg', function() {
     igelkott.connect();
     s.write(':jsmith!~jsmith@unaffiliated/jsmith PRIVMSG #channel :!kick fsmith\r\n');
   });
-
 });

@@ -2,13 +2,12 @@
   "server": {
     "host": "chat.freenode.net",
     "port": 6667,
-    "nick": "igelkott",
-    "channels": [
-      "##botbotbot"
-    ]
+    "nick": "sonic",
+    "channels": ["##botbotbot"]
   },
   "trigger": "!",
-  "plugins": ["001", "433", "privmsg", "log", "connect", "ping", "help", "plugin"],
+  "core" : ["001", "433", "privmsg", "connect", "ping"],
+  "plugins": {},
   "database": {
     "app_id":"",
     "js_key": ""

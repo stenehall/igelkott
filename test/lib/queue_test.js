@@ -1,17 +1,24 @@
 var assert = require('chai').assert,
-    Stream = require('stream'),
-    Igelkott = require('../../igelkott'),
-    PluginCore = require('../../lib/plugin').Plugin,
-    queue = require('../../lib/queue.js');
+Stream = require('stream'),
+Igelkott = require('../../igelkott'),
+PluginCore = require('../../lib/plugin').Plugin,
+queue = require('../../lib/queue.js');
 
 describe('Queue', function() {
 
   var igelkott,
-      s;
+  config,
+  s;
 
   beforeEach(function() {
     s = new Stream.PassThrough({objectMode: true});
-    igelkott = new Igelkott({'plugins': [], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
+
+    config = {
+      core: [],
+      plugins: {},
+      'adapter': s, 'connect': function() { this.server.emit('connect'); }
+    };
+    igelkott = new Igelkott(config);
   });
 
   describe('Add trigger, find trigger, kick user', function() {
@@ -40,9 +47,9 @@ describe('Queue', function() {
 
       TestPluginContructor.prototype.kick = function kick(message) {
         var obj = {
-            prefix : message.prefix,
-            command: 'KICK',
-            parameters : [message.parameters[0], 'kick', message.parameters[1].split(' ')[1]]
+          prefix : message.prefix,
+          command: 'KICK',
+          parameters : [message.parameters[0], 'kick', message.parameters[1].split(' ')[1]]
         };
 
         this.igelkott.queue.add({trigger: function(command, message) {
@@ -70,6 +77,6 @@ describe('Queue', function() {
       }, 100);
     });
 
-  });
+});
 
 });

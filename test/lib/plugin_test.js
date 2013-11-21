@@ -1,18 +1,23 @@
 var assert = require('chai').assert,
-    Stream = require('stream'),
-    Igelkott    = require('../../igelkott'),
-    PluginCore = require('../../lib/plugin').Plugin;
+Stream = require('stream'),
+Igelkott    = require('../../igelkott'),
+PluginCore = require('../../lib/plugin').Plugin;
 
 describe('Plugin', function() {
 
   var igelkott,
-      s,
-      plugin;
+  config,
+  s;
 
   beforeEach(function() {
     s = new Stream.PassThrough({objectMode: true});
-    igelkott = new Igelkott({'plugins': [], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
-    plugin = new PluginCore(igelkott);
+
+    config = {
+      core: [],
+      plugins: {},
+      'adapter': s, 'connect': function() { this.server.emit('connect'); }
+    };
+    igelkott = new Igelkott(config);
   });
 
   describe('PluginHandler', function() {

@@ -1,14 +1,14 @@
 var Stream = require('stream'),
-    Erk = require('erk'),
-    Fs = require('fs'),
-    Net = require('net'),
-    Path = require('path'),
-    _ = require('underscore'),
-    Colors = require('colors'),
-    Parse = require('parse').Parse,
+Erk = require('erk'),
+Fs = require('fs'),
+Net = require('net'),
+Path = require('path'),
+_ = require('underscore'),
+Colors = require('colors'),
+Parse = require('parse').Parse,
 
-    Queue = require('./lib/queue').Queue,
-    PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
+Queue = require('./lib/queue').Queue,
+PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
 
 var Igelkott = module.exports = function Igelkott (config) {
 
@@ -29,12 +29,17 @@ var Igelkott = module.exports = function Igelkott (config) {
 
   this.loadConfig(config);
 
+  this.config.core.forEach(function(key) {
+    this.config.plugins[key] = null;
+  }.bind(this));
+
   // Time to load some plugins.
-  if (this.config.plugins !== undefined && this.config.plugins.length > 0)
+  if (this.config.plugins !== undefined)
   {
-    this.config.plugins.forEach(function(plugin) {
-      this.load(plugin);
-    }.bind(this));
+    for(var plugin in this.config.plugins)
+    {
+      this.load(plugin, this.config.plugins[plugin]);
+    }
   }
 
   this.setUpServer(this.config.adapter || new Net.Socket());
@@ -44,26 +49,27 @@ var Igelkott = module.exports = function Igelkott (config) {
 Igelkott.prototype = Object.create(Stream.Duplex.prototype, {constructor: {value: Igelkott}});
 
 Object.defineProperty(Igelkott.prototype, "db", {
-get: function() {
-  if (this._db === undefined) {
-    if (this.config.database.app_id === undefined ||
+  get: function() {
+    if (this._db === undefined) {
+      if (this.config.database.app_id === undefined ||
         this.config.database.app_id === '' ||
         this.config.database.js_key === undefined ||
         this.config.database.js_key === '')
-    {
-      this._db = false;
+      {
+        this._db = false;
+      }
+      else
+      {
+        Parse.initialize(this.config.database.app_id, this.config.database.js_key);
+        this._db = Parse;
+      }
     }
-    else
-    {
-      Parse.initialize(this.config.database.app_id, this.config.database.js_key);
-      this._db = Parse;
-    }
+    return this._db;
   }
-  return this._db;
-}});
+});
 
-Igelkott.prototype.load = function load(plugin, pluginPath) {
-  this.plugin.tryToLoad(plugin, pluginPath);
+Igelkott.prototype.load = function load(plugin, config) {
+  this.plugin.tryToLoad(plugin, config);
 };
 
 Igelkott.prototype.setUpServer = function setUpServer(server) {

@@ -9,7 +9,7 @@
   "main": "igelkott.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stenehall/igelkott.js"
+    "url": "https://github.com/stenehall/igelkott"
   },
   "keywords": [
     "bot"

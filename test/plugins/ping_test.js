@@ -1,15 +1,28 @@
 var assert = require('chai').assert,
-    Stream = require('stream'),
-    Igelkott    = require(process.cwd()+'/igelkott');
+Stream = require('stream'),
+Igelkott    = require(process.cwd()+'/igelkott'),
+Ping = require('../../plugins/ping.js').Plugin;
+
 
 describe('Plugin - ping', function() {
 
   var igelkott,
-      s;
+  config,
+  s,
+  server;
+
 
   it('Should correctly respond to PING', function(done) {
     s = new Stream.PassThrough({objectMode: true});
-    igelkott = new Igelkott({'plugins': ['ping'], 'adapter': s, 'connect': function() { this.server.emit('connect'); }});
+
+    config = {
+      core: [],
+      plugins: {},
+      'adapter': s, 'connect': function() { this.server.emit('connect'); }
+    };
+
+    igelkott = new Igelkott(config);
+    igelkott.plugin.load('ping', {}, Ping);
 
     igelkott.on('PONG', function(message) {
       assert.equal(message.parameters[0], 'brooks.freenode.net');
