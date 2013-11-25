@@ -15,7 +15,6 @@ describe('Queue', function() {
 
     config = {
       core: [],
-      plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
     igelkott = new Igelkott(config);
@@ -76,7 +75,5 @@ describe('Queue', function() {
         s.write(':hobana.freenode.net 330 atti fsmith fsmith :is logged in as\r\n');
       }, 100);
     });
-
-});
-
+  });
 });

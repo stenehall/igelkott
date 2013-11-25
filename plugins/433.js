@@ -1,11 +1,11 @@
 /*
  * @CorePlugin
- * @Description: Listens on 001 after that it should be safe to join
+ * @Description: Listens on 433 (and 451) after that it should be safe to join
  *
  */
 
-var plugin_433 = function plugin_433() {
-  this.listeners = {'433': this._433};
+ var plugin_433 = function plugin_433() {
+  this.listeners = {'433': this._433, '451': this._433};
 };
 
 plugin_433.prototype._433 = function _433() {

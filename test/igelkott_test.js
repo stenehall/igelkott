@@ -1,6 +1,6 @@
 var assert = require('chai').assert,
-    Stream = require('stream'),
-    Igelkott = require("../igelkott");
+Stream = require('stream'),
+Igelkott = require("../igelkott");
 
 describe('Igelkott', function() {
 
@@ -30,5 +30,4 @@ describe('Igelkott', function() {
       igelkott.connect();
     });
   });
-
 });

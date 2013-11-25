@@ -29,8 +29,8 @@ describe('Plugin - 433', function() {
       igelkott.on('connect', function() {
         assert.equal(config.server.nick, 'sonic_');
         done();
-      })
-    })
+      });
+    });
 
     igelkott.connect();
     s.write(':cameron.freenode.net 433\r\n');

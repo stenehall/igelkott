@@ -14,7 +14,6 @@ describe('Plugin', function() {
 
     config = {
       core: [],
-      plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
     igelkott = new Igelkott(config);

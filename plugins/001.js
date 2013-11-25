@@ -4,7 +4,7 @@
  *
  */
 
-var _001 = function _001() {
+ var _001 = function _001() {
   this.listeners = {'001': this._001};
 };
 

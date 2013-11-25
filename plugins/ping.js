@@ -4,7 +4,7 @@
  *
  */
 
-var Ping = function Ping() {
+ var Ping = function Ping() {
   this.listeners = {PING: this.pong};
 };
 

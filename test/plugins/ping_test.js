@@ -3,14 +3,12 @@ Stream = require('stream'),
 Igelkott    = require(process.cwd()+'/igelkott'),
 Ping = require('../../plugins/ping.js').Plugin;
 
-
 describe('Plugin - ping', function() {
 
   var igelkott,
   config,
   s,
   server;
-
 
   it('Should correctly respond to PING', function(done) {
     s = new Stream.PassThrough({objectMode: true});
