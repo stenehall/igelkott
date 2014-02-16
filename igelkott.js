@@ -92,7 +92,7 @@ Igelkott.prototype.connect = function connect() {
 };
 
 Igelkott.prototype.end = function connect () {
-  console.log('Time to sleep...');
+  this.log('Time to sleep...');
 };
 
 Igelkott.prototype.loadConfig = function loadConfig(config) {
