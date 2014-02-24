@@ -7,27 +7,28 @@ describe('Igelkott', function() {
   var igelkott;
 
   describe('New igelkott', function() {
-    it('Should load config from directory', function() {
+
+    it('Should be able to create a new igelkott with a minimal config', function() {
       igelkott = new Igelkott({'plugins': []});
-      assert.strictEqual(igelkott.config.server.host, 'chat.freenode.net');
-      assert.strictEqual(igelkott.config.server.port, 6667);
     });
 
-    it('Should be able to overload settings', function() {
-      igelkott = new Igelkott({'plugins': [], server: {port: 7000, host: 'chat.freenode.net'}});
-      assert.strictEqual(igelkott.config.server.host, 'chat.freenode.net');
-      assert.strictEqual(igelkott.config.server.port, 7000);
+    it('Should throw error on missing plugins for config', function() {
+      assert.throws(Igelkott, Error);
     });
+
   });
 
   describe('Connect', function() {
+
     it('Should emit connected if successful', function(done) {
-      igelkott = new Igelkott({'plugins': [], 'adapter': new Stream.PassThrough(), 'connect': function() { this.server.emit('connect');}});
+      igelkott = new Igelkott({'core': [], 'plugins': [], 'adapter': new Stream.PassThrough(), 'connect': function() { this.server.emit('connect');}});
       igelkott.on('connect', function() {
         assert(true);
         done();
       });
       igelkott.connect();
     });
+
   });
+
 });

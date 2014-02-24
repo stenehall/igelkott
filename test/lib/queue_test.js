@@ -14,7 +14,9 @@ describe('Queue', function() {
     s = new Stream.PassThrough({objectMode: true});
 
     config = {
+      trigger: "!",
       core: [],
+      plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
     igelkott = new Igelkott(config);
@@ -37,7 +39,7 @@ describe('Queue', function() {
 
     it('Should kick jsmith', function(done) {
 
-      igelkott.plugin.tryToLoad('privmsg');
+      igelkott.load('privmsg');
 
       var TestPluginContructor = function TestPlugin() {
         this.pluginName = 'ping';
@@ -77,3 +79,4 @@ describe('Queue', function() {
     });
   });
 });
+

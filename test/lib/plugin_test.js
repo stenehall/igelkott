@@ -14,6 +14,7 @@ describe('Plugin', function() {
 
     config = {
       core: [],
+      plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
     igelkott = new Igelkott(config);
@@ -21,21 +22,21 @@ describe('Plugin', function() {
 
   describe('PluginHandler', function() {
     it('Should be able to load a plugin', function() {
-      igelkott.plugin.tryToLoad('privmsg');
+      igelkott.load('privmsg');
 
       // Should also check require.cache
       assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'object');
     });
 
     it('Should be able to unload a plugin', function() {
-      igelkott.plugin.tryToLoad('privmsg');
+      igelkott.load('privmsg');
       igelkott.plugin.unload('privmsg');
 
       assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'undefined');
     });
 
     it('Should be able to reload a plugin', function() {
-      igelkott.plugin.tryToLoad('privmsg');
+      igelkott.load('privmsg');
       igelkott.plugin.reload('privmsg');
 
       assert.strictEqual(typeof igelkott.plugin.plugins['privmsg'], 'object');
