@@ -13,7 +13,6 @@ describe('Plugin', function() {
     s = new Stream.PassThrough({objectMode: true});
 
     config = {
-      core: [],
       plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };

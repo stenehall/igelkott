@@ -32,10 +32,6 @@ var Igelkott = module.exports = function Igelkott(config) {
     callback();
   };
 
-  //this.config.core.forEach(function(key) {
-  //  this.config.plugins[key] = null;
-  //}.bind(this));
-
   // Time to load some plugins.
   for (var plugin in this.config.plugins) {
     this.load(plugin, this.config.plugins[plugin]);

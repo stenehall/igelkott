@@ -21,7 +21,7 @@ describe('Igelkott', function() {
   describe('Connect', function() {
 
     it('Should emit connected if successful', function(done) {
-      igelkott = new Igelkott({'core': [], 'plugins': [], 'adapter': new Stream.PassThrough(), 'connect': function() { this.server.emit('connect');}});
+      igelkott = new Igelkott({'plugins': [], 'adapter': new Stream.PassThrough(), 'connect': function() { this.server.emit('connect');}});
       igelkott.on('connect', function() {
         assert(true);
         done();

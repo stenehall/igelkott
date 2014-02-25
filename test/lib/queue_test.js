@@ -15,7 +15,6 @@ describe('Queue', function() {
 
     config = {
       trigger: "!",
-      core: [],
       plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
