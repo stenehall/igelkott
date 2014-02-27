@@ -4,8 +4,7 @@ Fs = require('fs'),
 Net = require('net'),
 Path = require('path'),
 _ = require('underscore'),
-Colors = require('colors'),
-Parse = require('parse').Parse,
+Colors = require('colors');
 
 Queue = require('./lib/queue').Queue,
 PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
@@ -50,24 +49,6 @@ Igelkott.prototype = Object.create(Stream.Duplex.prototype, {
   }
 });
 
-Object.defineProperty(Igelkott.prototype, "db", {
-  get: function() {
-    if (this._db === undefined) {
-      if (this.config.database === undefined ||
-        this.config.database.app_id === undefined ||
-        this.config.database.app_id === '' ||
-        this.config.database.js_key === undefined ||
-        this.config.database.js_key === '') {
-        this._db = false;
-    } else {
-      Parse.initialize(this.config.database.app_id, this.config.database.js_key);
-      this._db = Parse;
-    }
-  }
-  return this._db;
-}
-});
-
 Igelkott.prototype.load = function load(pluginName, config, plugin) {
 
   var config = config || this.config.plugins[pluginName];
@@ -104,3 +85,4 @@ Igelkott.prototype.connect = function connect() {
 Igelkott.prototype.end = function connect() {
   this.log('Time to sleep...');
 };
+
