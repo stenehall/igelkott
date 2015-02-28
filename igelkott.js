@@ -1,16 +1,11 @@
 var Stream = require('stream'),
 Erk = require('erk'),
-Fs = require('fs'),
-Net = require('net'),
-Path = require('path'),
-_ = require('underscore'),
-Colors = require('colors');
+Net = require('net');
 
 Queue = require('./lib/queue').Queue,
 PluginHandler = require('./lib/pluginHandler.js').PluginHandler;
 
 var Igelkott = module.exports = function Igelkott(config) {
-
   Stream.Duplex.call(this, {
     objectMode: true
   });
@@ -40,7 +35,6 @@ var Igelkott = module.exports = function Igelkott(config) {
   this.doConnect(this.config.connect || function() {
     this.server.connect(this.config.server.port, this.config.server.host);
   });
-
 };
 
 Igelkott.prototype = Object.create(Stream.Duplex.prototype, {
@@ -50,16 +44,15 @@ Igelkott.prototype = Object.create(Stream.Duplex.prototype, {
 });
 
 Igelkott.prototype.load = function load(pluginName, config, plugin) {
-
-  var config = config || this.config.plugins[pluginName];
-  var plugin = plugin || require('../igelkott-'+pluginName).Plugin;
+  var config = config || this.config.plugins[pluginName] || {};
+  var plugin = plugin || require(this.config.pluginPath + 'igelkott-'+pluginName).Plugin;
 
   try {
     this.plugin.load(pluginName, config, plugin);
   } catch (err)
   {
     console.log(err);
-    this.log('No such plugin: '+pluginName);
+    this.error('No such plugin: '+pluginName);
   }
 };
 
@@ -72,17 +65,8 @@ Igelkott.prototype.setUpServer = function setUpServer(server) {
   }.bind(this));
 };
 
-Igelkott.prototype.doConnect = function doConnect(doConnect) {
-  this.connection = doConnect;
-};
-
+Igelkott.prototype.doConnect = function doConnect(doConnect) { this.connection = doConnect; };
 Igelkott.prototype.log = function log() {};
-
-Igelkott.prototype.connect = function connect() {
-  this.connection();
-};
-
-Igelkott.prototype.end = function connect() {
-  this.log('Time to sleep...');
-};
-
+Igelkott.prototype.error = function error() {};
+Igelkott.prototype.connect = function connect() { this.connection(); };
+Igelkott.prototype.end = function connect() { this.log('Time to sleep...'); };

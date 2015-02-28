@@ -14,6 +14,7 @@ describe('Plugin', function() {
 
     config = {
       plugins: {},
+      pluginPath: './test/fixtures/plugins/',
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
     igelkott = new Igelkott(config);

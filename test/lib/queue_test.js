@@ -16,6 +16,7 @@ describe('Queue', function() {
     config = {
       trigger: "!",
       plugins: {},
+      pluginPath: './test/fixtures/plugins/',
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
     igelkott = new Igelkott(config);
@@ -23,7 +24,7 @@ describe('Queue', function() {
 
   describe('Add trigger, find trigger, kick user', function() {
 
-    it('Should be able to add to add to the queue', function() {
+    it('Should be able to add an object to the queue', function() {
       var q = new queue.Queue();
 
       assert.ok(q.add({foo: 'bar'}));
@@ -31,8 +32,8 @@ describe('Queue', function() {
 
     it('Should be able to remove an added object to the queue', function() {
       var q = new queue.Queue();
-
-      assert.ok(q.add({foo: 'bar'}));
+      q.add({foo: 'bar'})
+      assert.ok(q.remove(0));
     });
 
 
@@ -78,4 +79,3 @@ describe('Queue', function() {
     });
   });
 });
-
